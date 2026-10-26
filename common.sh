@@ -34,3 +34,12 @@ validate(){
     fi
 }
 
+odejs_setup(){
+    dnf module disable nodejs -y &>> $logs_file
+    dnf module enable nodejs:24 -y &>> $logs_file
+    dnf install nodejs -y &>> $logs_file
+    validate $? "Installing nodejs 24"
+
+    npm install &>> $logs_file
+    validate $? "Installing dependencies"
+}
